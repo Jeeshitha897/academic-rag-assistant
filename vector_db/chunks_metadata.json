@@ -1,0 +1,146 @@
+[
+  {
+    "chunk_id": "chunk_0001",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 1,
+    "section": "SECTION 1.1: The Transformer Architecture and Self-Attention",
+    "text": "================================================================================\nCOURSE TITLE: GENERATIVE AI & AGENTIC AI SYSTEMS (COURSE PACK & LECTURE NOTES)\nDEPARTMENT OF COMPUTER SCIENCE & ARTIFICIAL INTELLIGENCE\nACADEMIC YEAR: 2026-2027 | COURSE CODE: CS-804\nCOURSE COORDINATOR: DR. P. SUDHAKAR\n================================================================================\n\nUNIT 1: FOUNDATIONS OF GENERATIVE AI & TRANSFORMER ARCHITECTURES\n\nSECTION 1.1: The Transformer Architecture and Self-Attention",
+    "char_count": 508,
+    "token_estimate": 127
+  },
+  {
+    "chunk_id": "chunk_0002",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 1,
+    "section": "DEFINITION: Scaled Dot-Product Attention",
+    "text": "SECTION 1.1: The Transformer Architecture and Self-Attention\nThe foundation of modern Generative AI rests on the Transformer architecture introduced by Vaswani et al. in the landmark paper \"Attention Is All You Need\" (2017). Unlike predecessor sequence models such as Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) networks that process sequences sequentially token-by-token, Transformers process input sequences in parallel, enabling massive scalability across GPU clusters.\n\nDEFINITION: Scaled Dot-Product Attention",
+    "char_count": 537,
+    "token_estimate": 134
+  },
+  {
+    "chunk_id": "chunk_0003",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 1,
+    "section": "DEFINITION: Scaled Dot-Product Attention",
+    "text": "DEFINITION: Scaled Dot-Product Attention\nAttention is formulated as mapping a set of query vectors (Q), key vectors (K), and value vectors (V) to an output representation. The mathematical formulation is:\nAttention(Q, K, V) = softmax( (Q * K^T) / sqrt(d_k) ) * V\nWhere:\n- Q is the Query matrix of dimension (N x d_k)\n- K is the Key matrix of dimension (M x d_k)\n- V is the Value matrix of dimension (M x d_v)\n- d_k is the dimension of the keys and queries",
+    "char_count": 455,
+    "token_estimate": 113
+  },
+  {
+    "chunk_id": "chunk_0004",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 1,
+    "section": "DEFINITION: Scaled Dot-Product Attention",
+    "text": "- V is the Value matrix of dimension (M x d_v)\n- d_k is the dimension of the keys and queries\n- The factor 1 / sqrt(d_k) is a scaling factor applied to prevent dot-products from growing excessively large in high dimensions, which would push the softmax function into regions with vanishingly small gradients.",
+    "char_count": 308,
+    "token_estimate": 77
+  },
+  {
+    "chunk_id": "chunk_0005",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 2,
+    "section": "SECTION 1.3: Pre-training, Instruction Tuning, and RLHF",
+    "text": "SECTION 1.2: Multi-Head Attention and Positional Encoding\nInstead of performing a single attention function, Transformers project queries, keys, and values h times with different learned linear projections to dimensions d_k, d_k, and d_v respectively.\nMultiHead(Q, K, V) = Concat(head_1, ..., head_h) * W^O\nWhere each head_i = Attention(Q * W_i^Q, K * W_i^K, V * W_i^V).\nBecause Transformers lack recurrent loops, they do not inherently encode token order. To inject positional awareness, sinusoidal Positional Encodings (PE) or modern Rotary Position Embeddings (RoPE) are added directly to the input embeddings.",
+    "char_count": 613,
+    "token_estimate": 153
+  },
+  {
+    "chunk_id": "chunk_0006",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 2,
+    "section": "UNIT 2: RETRIEVAL-AUGMENTED GENERATION (RAG) ARCHITECTURE",
+    "text": "SECTION 1.3: Pre-training, Instruction Tuning, and RLHF\nLarge Language Models (LLMs) undergo a two-phase training lifecycle:\n1. Self-Supervised Pre-training: Trained on massive corpora (trillions of tokens) via causal language modeling (predicting the next token: P(w_t | w_{<t})).\n2. Instruction Fine-Tuning (SFT) & Alignment: Aligns the raw base model with human intent using Reinforcement Learning from Human Feedback (RLHF) or Direct Preference Optimization (DPO).\n\n================================================================================\nUNIT 2: RETRIEVAL-AUGMENTED GENERATION (RAG) ARCHITECTURE",
+    "char_count": 608,
+    "token_estimate": 152
+  },
+  {
+    "chunk_id": "chunk_0007",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 2,
+    "section": "SECTION 2.1: The Motivation and Anatomy of RAG",
+    "text": "UNIT 2: RETRIEVAL-AUGMENTED GENERATION (RAG) ARCHITECTURE\n================================================================================\n\nSECTION 2.1: The Motivation and Anatomy of RAG\nWhile Large Language Models possess broad generalized knowledge, they suffer from two major academic limitations:\n1. Knowledge Hallucinations: Generating factually incorrect assertions with high confidence.\n2. Temporal Cutoffs & Proprietary Ignorance: Inability to access internal university notes, syllabi, and unpublished textbook updates.",
+    "char_count": 528,
+    "token_estimate": 132
+  },
+  {
+    "chunk_id": "chunk_0008",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 3,
+    "section": "SECTION 2.2: Document Preprocessing and Domain Chunking",
+    "text": "DEFINITION: Retrieval-Augmented Generation (RAG)\nRAG is an architectural pattern that combines parametric memory (the internal weights of a pre-trained LLM) with non-parametric memory (an external, dynamically indexed document database). When a user submits a query, the system retrieves relevant document passages from the knowledge repository and appends them to the prompt context, instructing the LLM to generate an answer grounded exclusively in the provided passages.\n\nSECTION 2.2: Document Preprocessing and Domain Chunking\nThe quality of a RAG pipeline depends heavily on document ingestion and chunking:",
+    "char_count": 612,
+    "token_estimate": 153
+  },
+  {
+    "chunk_id": "chunk_0009",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 3,
+    "section": "SECTION 2.2: Document Preprocessing and Domain Chunking",
+    "text": "The quality of a RAG pipeline depends heavily on document ingestion and chunking:\n- Naive Chunking: Arbitrary splitting by fixed character counts (e.g. 500 characters) often breaks mathematical equations, tables, and sentence structures.\n- Domain-Tailored Semantic Chunking: Splitting that respects university syllabus modules, chapter titles, definitions, and paragraph breaks.\n- Chunk Overlap: Retaining an overlap of 10% to 20% (e.g., 100-150 characters) ensures that context spanning chunk boundaries is preserved.",
+    "char_count": 518,
+    "token_estimate": 129
+  },
+  {
+    "chunk_id": "chunk_0010",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 3,
+    "section": "SECTION 2.2: Document Preprocessing and Domain Chunking",
+    "text": "- Metadata Enrichment: Attaching source document names, unit names, and page numbers to each chunk is essential for traceable source citation and verification.",
+    "char_count": 159,
+    "token_estimate": 39
+  },
+  {
+    "chunk_id": "chunk_0011",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 4,
+    "section": "SECTION 2.3: Vector Embeddings and Hybrid Retrieval",
+    "text": "SECTION 2.3: Vector Embeddings and Hybrid Retrieval\nTo match user queries with document chunks:\n1. Dense Retrieval: Chunks are transformed into continuous mathematical vectors using embedding models (such as text-embedding-004 or BGE-large). Similarity is measured via Cosine Similarity:\nCosine_Similarity(A, B) = (A . B) / (||A|| * ||B||)\n2. Sparse Retrieval (Okapi BM25): Exact term-matching based on term frequency and inverse document frequency, crucial for technical acronyms, course codes, and variable names.\n3. Hybrid Search & Reciprocal Rank Fusion (RRF):",
+    "char_count": 564,
+    "token_estimate": 141
+  },
+  {
+    "chunk_id": "chunk_0012",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 4,
+    "section": "SECTION 3.1: From Passive LLMs to Autonomous Agents",
+    "text": "3. Hybrid Search & Reciprocal Rank Fusion (RRF):\nModern academic RAG systems combine dense semantic ranking and sparse BM25 ranking via Reciprocal Rank Fusion:\nRRF_Score(d) = Sum( w_m / (60 + Rank_m(d)) )\nThis guarantees that both semantic meaning and exact course keywords are retrieved with high precision.\n\n================================================================================\nUNIT 3: AGENTIC AI SYSTEMS & MULTI-AGENT ARCHITECTURES\n================================================================================\n\nSECTION 3.1: From Passive LLMs to Autonomous Agents",
+    "char_count": 579,
+    "token_estimate": 144
+  },
+  {
+    "chunk_id": "chunk_0013",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 4,
+    "section": "SECTION 3.1: From Passive LLMs to Autonomous Agents",
+    "text": "SECTION 3.1: From Passive LLMs to Autonomous Agents\nA standard LLM is a single-turn, passive input-output text predictor. In contrast, an Agentic AI System is an autonomous entity equipped with:\n1. Reasoning: The ability to decompose complex goals into discrete sub-tasks.\n2. Action / Tool Execution: The ability to execute external APIs, query vector databases, run code in sandboxes, and perform web searches.\n3. Memory: Maintaining short-term working memory (chat history) and long-term episodic memory (vector stores).\n4. Reflection & Self-Correction: Evaluating intermediate outputs and retrying upon errors.",
+    "char_count": 613,
+    "token_estimate": 153
+  },
+  {
+    "chunk_id": "chunk_0014",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 5,
+    "section": "SECTION 3.3: Evaluation Metrics for Academic RAG",
+    "text": "SECTION 3.2: The ReAct Framework (Reasoning + Acting)\nIntroduced by Yao et al. (2022), the ReAct framework interleaves reasoning traces and task-specific actions:\n- Thought: \"The student is asking to derive the loss gradient, but I need the formula from Unit 1.\"\n- Action: Call vector database search with query \"Scaled Dot-Product Attention derivation\".\n- Observation: Retrieved chunk from Section 1.1.\n- Thought: \"Now I have the exact formulation; I can synthesize the step-by-step proof.\"\n- Final Answer: Deliver grounded mathematical derivation with citations.\n\nSECTION 3.3: Evaluation Metrics for Academic RAG",
+    "char_count": 614,
+    "token_estimate": 153
+  },
+  {
+    "chunk_id": "chunk_0015",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 5,
+    "section": "SECTION 3.3: Evaluation Metrics for Academic RAG",
+    "text": "- Final Answer: Deliver grounded mathematical derivation with citations.\n\nSECTION 3.3: Evaluation Metrics for Academic RAG\nTo scientifically validate an academic RAG system, four core RAG Triad metrics are measured:\n1. Context Relevance: Fraction of retrieved chunks that are genuinely pertinent to the query.\n2. Groundedness (Faithfulness): Proportion of claims in the generated answer that can be directly mapped to the retrieved context chunks, guarding against hallucination.\n3. Answer Relevance: How directly and completely the generated answer addresses the student's question.",
+    "char_count": 583,
+    "token_estimate": 145
+  },
+  {
+    "chunk_id": "chunk_0016",
+    "source": "GenAI_Agentic_Systems_Notes.txt",
+    "page": 5,
+    "section": "SECTION 3.3: Evaluation Metrics for Academic RAG",
+    "text": "3. Answer Relevance: How directly and completely the generated answer addresses the student's question.\n4. Latency and Retrieval Precision: System response time (under 2 seconds) and top-k precision.",
+    "char_count": 199,
+    "token_estimate": 49
+  }
+]
