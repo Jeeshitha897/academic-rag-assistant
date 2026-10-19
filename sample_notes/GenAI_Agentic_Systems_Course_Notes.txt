@@ -1,0 +1,87 @@
+================================================================================
+COURSE TITLE: GENERATIVE AI & AGENTIC AI SYSTEMS (COURSE PACK & LECTURE NOTES)
+DEPARTMENT OF COMPUTER SCIENCE & ARTIFICIAL INTELLIGENCE
+ACADEMIC YEAR: 2026-2027 | COURSE CODE: CS-804
+COURSE COORDINATOR: DR. P. SUDHAKAR
+================================================================================
+
+UNIT 1: FOUNDATIONS OF GENERATIVE AI & TRANSFORMER ARCHITECTURES
+
+SECTION 1.1: The Transformer Architecture and Self-Attention
+The foundation of modern Generative AI rests on the Transformer architecture introduced by Vaswani et al. in the landmark paper "Attention Is All You Need" (2017). Unlike predecessor sequence models such as Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) networks that process sequences sequentially token-by-token, Transformers process input sequences in parallel, enabling massive scalability across GPU clusters.
+
+DEFINITION: Scaled Dot-Product Attention
+Attention is formulated as mapping a set of query vectors (Q), key vectors (K), and value vectors (V) to an output representation. The mathematical formulation is:
+Attention(Q, K, V) = softmax( (Q * K^T) / sqrt(d_k) ) * V
+Where:
+- Q is the Query matrix of dimension (N x d_k)
+- K is the Key matrix of dimension (M x d_k)
+- V is the Value matrix of dimension (M x d_v)
+- d_k is the dimension of the keys and queries
+- The factor 1 / sqrt(d_k) is a scaling factor applied to prevent dot-products from growing excessively large in high dimensions, which would push the softmax function into regions with vanishingly small gradients.
+
+SECTION 1.2: Multi-Head Attention and Positional Encoding
+Instead of performing a single attention function, Transformers project queries, keys, and values h times with different learned linear projections to dimensions d_k, d_k, and d_v respectively.
+MultiHead(Q, K, V) = Concat(head_1, ..., head_h) * W^O
+Where each head_i = Attention(Q * W_i^Q, K * W_i^K, V * W_i^V).
+Because Transformers lack recurrent loops, they do not inherently encode token order. To inject positional awareness, sinusoidal Positional Encodings (PE) or modern Rotary Position Embeddings (RoPE) are added directly to the input embeddings.
+
+SECTION 1.3: Pre-training, Instruction Tuning, and RLHF
+Large Language Models (LLMs) undergo a two-phase training lifecycle:
+1. Self-Supervised Pre-training: Trained on massive corpora (trillions of tokens) via causal language modeling (predicting the next token: P(w_t | w_{<t})).
+2. Instruction Fine-Tuning (SFT) & Alignment: Aligns the raw base model with human intent using Reinforcement Learning from Human Feedback (RLHF) or Direct Preference Optimization (DPO).
+
+================================================================================
+UNIT 2: RETRIEVAL-AUGMENTED GENERATION (RAG) ARCHITECTURE
+================================================================================
+
+SECTION 2.1: The Motivation and Anatomy of RAG
+While Large Language Models possess broad generalized knowledge, they suffer from two major academic limitations:
+1. Knowledge Hallucinations: Generating factually incorrect assertions with high confidence.
+2. Temporal Cutoffs & Proprietary Ignorance: Inability to access internal university notes, syllabi, and unpublished textbook updates.
+
+DEFINITION: Retrieval-Augmented Generation (RAG)
+RAG is an architectural pattern that combines parametric memory (the internal weights of a pre-trained LLM) with non-parametric memory (an external, dynamically indexed document database). When a user submits a query, the system retrieves relevant document passages from the knowledge repository and appends them to the prompt context, instructing the LLM to generate an answer grounded exclusively in the provided passages.
+
+SECTION 2.2: Document Preprocessing and Domain Chunking
+The quality of a RAG pipeline depends heavily on document ingestion and chunking:
+- Naive Chunking: Arbitrary splitting by fixed character counts (e.g. 500 characters) often breaks mathematical equations, tables, and sentence structures.
+- Domain-Tailored Semantic Chunking: Splitting that respects university syllabus modules, chapter titles, definitions, and paragraph breaks.
+- Chunk Overlap: Retaining an overlap of 10% to 20% (e.g., 100-150 characters) ensures that context spanning chunk boundaries is preserved.
+- Metadata Enrichment: Attaching source document names, unit names, and page numbers to each chunk is essential for traceable source citation and verification.
+
+SECTION 2.3: Vector Embeddings and Hybrid Retrieval
+To match user queries with document chunks:
+1. Dense Retrieval: Chunks are transformed into continuous mathematical vectors using embedding models (such as text-embedding-004 or BGE-large). Similarity is measured via Cosine Similarity:
+Cosine_Similarity(A, B) = (A . B) / (||A|| * ||B||)
+2. Sparse Retrieval (Okapi BM25): Exact term-matching based on term frequency and inverse document frequency, crucial for technical acronyms, course codes, and variable names.
+3. Hybrid Search & Reciprocal Rank Fusion (RRF):
+Modern academic RAG systems combine dense semantic ranking and sparse BM25 ranking via Reciprocal Rank Fusion:
+RRF_Score(d) = Sum( w_m / (60 + Rank_m(d)) )
+This guarantees that both semantic meaning and exact course keywords are retrieved with high precision.
+
+================================================================================
+UNIT 3: AGENTIC AI SYSTEMS & MULTI-AGENT ARCHITECTURES
+================================================================================
+
+SECTION 3.1: From Passive LLMs to Autonomous Agents
+A standard LLM is a single-turn, passive input-output text predictor. In contrast, an Agentic AI System is an autonomous entity equipped with:
+1. Reasoning: The ability to decompose complex goals into discrete sub-tasks.
+2. Action / Tool Execution: The ability to execute external APIs, query vector databases, run code in sandboxes, and perform web searches.
+3. Memory: Maintaining short-term working memory (chat history) and long-term episodic memory (vector stores).
+4. Reflection & Self-Correction: Evaluating intermediate outputs and retrying upon errors.
+
+SECTION 3.2: The ReAct Framework (Reasoning + Acting)
+Introduced by Yao et al. (2022), the ReAct framework interleaves reasoning traces and task-specific actions:
+- Thought: "The student is asking to derive the loss gradient, but I need the formula from Unit 1."
+- Action: Call vector database search with query "Scaled Dot-Product Attention derivation".
+- Observation: Retrieved chunk from Section 1.1.
+- Thought: "Now I have the exact formulation; I can synthesize the step-by-step proof."
+- Final Answer: Deliver grounded mathematical derivation with citations.
+
+SECTION 3.3: Evaluation Metrics for Academic RAG
+To scientifically validate an academic RAG system, four core RAG Triad metrics are measured:
+1. Context Relevance: Fraction of retrieved chunks that are genuinely pertinent to the query.
+2. Groundedness (Faithfulness): Proportion of claims in the generated answer that can be directly mapped to the retrieved context chunks, guarding against hallucination.
+3. Answer Relevance: How directly and completely the generated answer addresses the student's question.
+4. Latency and Retrieval Precision: System response time (under 2 seconds) and top-k precision.
